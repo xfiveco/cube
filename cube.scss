@@ -1,0 +1,76 @@
+@import 'compass';
+
+/* Cube styles */
+
+.cube-3d-available .robot-cube {
+	$cube_size: 130px;
+	position: relative;
+	z-index: 10;
+	display: block;
+	width: $cube_size;
+	height: $cube_size;
+	@include transform(perspective($cube_size * 10), false);
+	@include transform-style(preserve-3d);
+
+	&.rotate {
+		@include transform(rotateX(360deg) rotateY(360deg) rotateZ(360deg), false);
+	}
+
+	.side-1, .side-2, .side-3, .side-4, .side-5, .side-6 {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		background-size: $cube_size * 3 $cube_size * 2;
+	}
+
+
+	.side-1 {
+		width: 100%;
+		height: 100%;
+		@include transform(rotateY(-90deg) translateZ($cube_size/ 2));
+	}
+
+	.side-2 {
+		width: 100%;
+		height: 100%;
+		background-position: -$cube_size 0;
+		@include transform(rotateX(-90deg) translateZ($cube_size / 2));
+	}
+
+	.side-3 {
+		width: 100%;
+		height: 100%;
+		background-position: -$cube_size * 2 0;
+		@include transform(translateZ($cube_size / 2));
+		@include transform-origin(0, 0, 0);
+		@include transition-property(transform, background);
+		@include transition-duration(.3s);
+	}
+
+	.side-4 {
+		width: 100%;
+		height: 100%;
+		background-position: 0 (-$cube_size);
+		@include transform(rotateX(90deg) translateZ($cube_size / 2));
+	}
+
+	.side-5 {
+		width: 100%;
+		height: 100%;
+		background-position: -$cube_size (-$cube_size);
+		@include transform(rotateY(90deg) translateZ($cube_size/ 2));
+	}
+
+	.side-6 {
+		width: 100%;
+		height: 100%;
+		background-position: -$cube_size * 2 (-$cube_size);
+		@include transform(rotateY(180deg) translateX(-$cube_size) translateZ($cube_size / 2));
+		@include transform-origin(0, 0, 0);
+		@include transition-property(transform, background);
+		@include transition-duration(.3s);
+	}
+}
+
+/* Cube styles - END */

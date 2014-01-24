@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>cube.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>cube.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Allows to manipulate the cube created using CSS and HTML.</p>
+<p>author: <strong>XHTMLized</strong></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-comment">/*jshint browser: true, smarttabs: false, indent: 4, undef: true, unused: true, strict: true, trailing: true, onevar: true, white: true */</span>
+<span class="hljs-comment">/*globals requestAnimationFrame, cancelAnimationFrame*/</span>
+
+(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+<span class="hljs-pi">    'use strict'</span>;
+
+    <span class="hljs-keyword">var</span> Test, Cube;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="tests">Tests</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    Test = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h3 id="-requestanimationframe-test">‘requestAnimationFrame’ test</h3>
+<p>Checks if ‘requestAnimationFrame’ is available</p>
+<ul>
+<li>return: <strong>boolean</strong> Returns true if ‘requestAnimationFrame’ is available.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        animationFrame: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+            <span class="hljs-keyword">return</span> !!window.requestAnimationFrame;
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h3 id="css-3d-test">CSS 3d test</h3>
+<p>Checks if CSS 3d transforms can be used</p>
+<ul>
+<li>return: <strong>boolean</strong> Returns true if ‘requestAnimationFrame’ is available.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        css3d: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+            <span class="hljs-keyword">if</span> (document.querySelector === <span class="hljs-literal">undefined</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
+
+            <span class="hljs-keyword">var</span> EL_ID = <span class="hljs-string">'temporaryCubeCSS3dElement'</span>,
+                STYLE_ID = <span class="hljs-string">'temporaryCubeCSS3dStyle'</span>,
+                $body = document.body,
+                $el,
+                $style,
+                docStyles = document.documentElement.style,
+                prefixes = [<span class="hljs-string">'webkit'</span>, <span class="hljs-string">'moz'</span>, <span class="hljs-string">'ms'</span>, <span class="hljs-string">''</span>],
+                testResult,
+                i,
+                j;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <ul>
+<li><h4 id="test-for-preserve3d-css-property-">Test for ‘preserve3d’ CSS property.</h4>
+<ul>
+<li>return: <strong>boolean</strong> Returns true if ‘preserve3d’ is available.</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">testPreserve3d</span><span class="hljs-params">()</span> {</span>
+                <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, j = prefixes.length; i &lt; j; i += <span class="hljs-number">1</span>) {
+                    <span class="hljs-keyword">if</span> (prefixes[i].length &gt; <span class="hljs-number">0</span>) {
+                        <span class="hljs-keyword">if</span> (docStyles[prefixes[i] + <span class="hljs-string">'TransformStyle'</span>] !== <span class="hljs-literal">undefined</span>) {
+                            docStyles[prefixes[i] + <span class="hljs-string">'TransformStyle'</span>] = <span class="hljs-string">'preserve-3d'</span>;
+                            <span class="hljs-keyword">if</span> (docStyles[prefixes[i] + <span class="hljs-string">'TransformStyle'</span>].length &gt; <span class="hljs-number">0</span>) {
+                                docStyles[prefixes[i] + <span class="hljs-string">'TransformStyle'</span>] = <span class="hljs-string">''</span>;
+                                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                            }
+                        }
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-keyword">if</span> (docStyles.transformStyle !== <span class="hljs-literal">undefined</span>) {
+                            docStyles.transformStyle = <span class="hljs-string">'preserve-3d'</span>;
+                            <span class="hljs-keyword">if</span> (docStyles.transformStyle.length &gt; <span class="hljs-number">0</span>) {
+                                docStyles.transformStyle = <span class="hljs-string">''</span>;
+                                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                            }
+                        }
+                    }
+                }
+
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            }
+
+            testResult = testPreserve3d();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <ul>
+<li><strong>Note:</strong>
+This is additional test checking if ‘transform-3d’ is <strong>really available</strong>.
+It may happen that although property itself is available it’s not working properly.
+One of possible reasons can be lack of GPU support.
+The additional CSS 3d transform test is borrowed from <a href="https://github.com/Modernizr/Modernizr/blob/master/feature-detects/css/transforms3d.js">Modernizr</a></li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (testResult &amp;&amp; docStyles.webkitPerspective !== <span class="hljs-literal">undefined</span>) {
+                $style = document.createElement(<span class="hljs-string">'style'</span>);
+                $el = document.createElement(<span class="hljs-string">'div'</span>);
+
+                $style.id = STYLE_ID;
+                $el.id = EL_ID;
+
+                $body.appendChild($style);
+                $body.appendChild($el);
+
+                $style.textContent = [
+                    <span class="hljs-string">'@media (transform-3d), (-webkit-transform-3d) {'</span>,
+                    <span class="hljs-string">'    #'</span> + EL_ID + <span class="hljs-string">'{'</span>,
+                    <span class="hljs-string">'       left: 9px;'</span>,
+                    <span class="hljs-string">'       position: absolute;'</span>,
+                    <span class="hljs-string">'       height: 5px;'</span>,
+                    <span class="hljs-string">'       margin: 0;'</span>,
+                    <span class="hljs-string">'       padding: 0;'</span>,
+                    <span class="hljs-string">'       border: 0'</span>,
+                    <span class="hljs-string">'   }'</span>,
+                    <span class="hljs-string">'}'</span>
+                ].join(<span class="hljs-string">'\n'</span>);
+
+                testResult = $el.offsetLeft === <span class="hljs-number">9</span> &amp;&amp; $el.offsetHeight === <span class="hljs-number">5</span>;
+
+                $body.removeChild($style);
+                $body.removeChild($el);
+            }
+
+            <span class="hljs-keyword">return</span> testResult;
+        }
+    };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h2 id="css-class">CSS class</h2>
+<p>Adds class at the top of the document. 
+Useful for applying fallback if Cube cannot be fired.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (Test.animationFrame() &amp;&amp; Test.css3d()) {
+        document.documentElement.className += <span class="hljs-string">' cube-3d-available'</span>;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="factory-function">Factory function</h2>
+<p>Allows to create new Cube instance in the following fashion
+(note that ‘new’ is not necessary as it’s added inside
+the function below):</p>
+<pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
+</code></pre><p>and later use any of the available public classes, e.g.:</p>
+<pre><code>myCube.rotate();
+</code></pre><p>The function is revealed using <code>window</code> object.</p>
+<ul>
+<li>parameters:<ul>
+<li><code>selector</code> <strong>string</strong>                  Any CSS selector that will work with <a href="https://developer.mozilla.org/en-US/docs/Web/API/document.querySelector">querySelector</a>.</li>
+<li><code>props</code>    <strong>object</strong>                  The cube’s options passed to the constructor.</li>
+</ul>
+</li>
+<li>return         <strong>function</strong>  or <strong>object</strong> If the cube can be fired <code>Cube</code> will return new isntance of <code>Cube.instance</code> constructor else it will return object with empty methods.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    Cube = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(selector, props)</span> {</span>
+        <span class="hljs-keyword">if</span> (Test.animationFrame() &amp;&amp; Test.css3d()) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Cube.instance(selector, props || {});
+        }
+
+        <span class="hljs-keyword">return</span> {
+            applyRotation: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; },
+            rotate: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; },
+            focusOn: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; },
+            spinTo: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
+        };
+    };
+
+    window.Cube = Cube;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h2 id="constructor">Constructor</h2>
+<ul>
+<li>parameters:<ul>
+<li><code>selector</code> <strong>string</strong> Any CSS selector that will work with <a href="https://developer.mozilla.org/en-US/docs/Web/API/document.querySelector">querySelector</a>.</li>
+<li><code>props</code>    <strong>object</strong> The cube’s options.</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    Cube.instance = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(selector, props)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>The only option that can be currently passed to the constructor
+is <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/perspective">perspective</a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        props.perspective = props.perspective || <span class="hljs-number">1100</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h3 id="public-variables">Public variables</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <ul>
+<li><code>$cube</code>          <strong>object</strong>  A DOM element which is supposed to be a cube.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.$cube = document.querySelector(selector || <span class="hljs-string">'#robot-cube'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <ul>
+<li><code>props</code>          <strong>object</strong>  Options publicly available for methods.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.props = props;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <ul>
+<li><code>rotatePropsSet</code> <strong>boolean</strong> True if rotate properties (posX, posY, posZ, speedX, speedY, speedZ) has been set. See <code>rotate</code> method below.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.rotatePropsSet = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <ul>
+<li><code>rotateDir</code>      <strong>string</strong>  The cube’s rotation direction. Can be either ‘left’ or ‘right’.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.rotateDir = <span class="hljs-string">'right'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <ul>
+<li><code>speed[axis]</code>    <strong>number</strong>  Determines how fast the cube should rotate 360 degrees. Value is in ‘iterations’, not milliseconds.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.speedX = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.speedY = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.speedZ = <span class="hljs-number">0</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <ul>
+<li><code>pos[axis]</code>      <strong>number</strong>  The cube’s rotation value from <strong>0 to 360</strong>.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.posX = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.posY = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.posZ = <span class="hljs-number">0</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <ul>
+<li><code>snapshot[axis]</code> <strong>number</strong>  The cube’s rotation value from <strong>0 to 360</strong>. Used to ‘remember’ last values. See ‘focusOn’ method. </li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.snapshotX = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.snapshotY = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.snapshotZ = <span class="hljs-number">0</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <ul>
+<li><code>isRotating</code>     <strong>boolean</strong> True if cube is being rotated at the moment (rotate method is in use). See <code>rotate</code>.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.isRotating = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <ul>
+<li><code>isFocusing</code>     <strong>boolean</strong> True if cube is being focused at the moment (rotates to show selected side). See <code>rotate</code>, <code>spinTo</code>, and <code>focusOn</code> methods.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.isFocusing = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <ul>
+<li><code>hasFocused</code>     <strong>boolean</strong> True if cube has roteted to the selected side. See <code>focusOn</code> method.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.hasFocused = <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <ul>
+<li><code>iterators</code>     <strong>object</strong>   Stores iterators for each axis. See <code>spinTo</code> method.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.iterators = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <ul>
+<li><code>timers</code>        <strong>object</strong>   Stores timers (requestAnimationFrame).</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>.timers = {};
+    };
+
+    Cube.instance.prototype = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <ul>
+<li><code>xyz</code> and <code>XYZ</code> <strong>array</strong>    ‘x’, ‘y’, ‘z’ prefixes.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        xyz: [<span class="hljs-string">'x'</span>, <span class="hljs-string">'y'</span>, <span class="hljs-string">'z'</span>],
+        XYZ: [<span class="hljs-string">'X'</span>, <span class="hljs-string">'Y'</span>, <span class="hljs-string">'Z'</span>],</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <ul>
+<li><code>sides</code>         <strong>object</strong>   Predefined cube’s sides coordinates.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        sides: {
+            <span class="hljs-string">'side-1'</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">90</span>, <span class="hljs-number">0</span>],
+            <span class="hljs-string">'side-2'</span>: [<span class="hljs-number">90</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+            <span class="hljs-string">'side-3'</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+            <span class="hljs-string">'side-4'</span>: [<span class="hljs-number">270</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+            <span class="hljs-string">'side-5'</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">270</span>, <span class="hljs-number">0</span>],
+            <span class="hljs-string">'side-6'</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">180</span>, <span class="hljs-number">0</span>]
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <h3 id="public-methods">Public Methods</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h4 id="apply-rotation">Apply rotation</h4>
+<p>Set rotation of the cube.</p>
+<ul>
+<li>parameters: <code>props</code> <strong>object</strong> Rotation of each axis in the following format:<pre><code>{
+   x: [number from <span class="hljs-number">0</span> to <span class="hljs-number">360</span>],
+   y: [number from <span class="hljs-number">0</span> to <span class="hljs-number">360</span>],
+   z: [number from <span class="hljs-number">0</span> to <span class="hljs-number">360</span>]
+}
+</code></pre></li>
+</ul>
+<p>Usage example:</p>
+<pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
+
+<span class="hljs-comment">// Set the cube's postion</span>
+myCube.applyRotation({
+    x: <span class="hljs-number">45</span>,
+    y: <span class="hljs-number">30</span>,
+    z: <span class="hljs-number">270</span>
+});
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        applyRotation: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(props)</span> {</span>
+            <span class="hljs-keyword">var</span> prefix = <span class="hljs-keyword">this</span>._getPrefix(),
+                styles = <span class="hljs-string">'perspective('</span> + <span class="hljs-keyword">this</span>.props.perspective + <span class="hljs-string">'px)'</span>,
+                currentDeg,
+                axes = <span class="hljs-number">0</span>;
+
+            <span class="hljs-keyword">if</span> (props) {
+                <span class="hljs-keyword">while</span> (axes &lt; <span class="hljs-number">3</span>) {
+                    currentDeg = props[<span class="hljs-keyword">this</span>.xyz[axes]];
+                    currentDeg = <span class="hljs-built_in">isNaN</span>(currentDeg) ? <span class="hljs-number">0</span> : currentDeg;
+
+                    <span class="hljs-keyword">this</span>[<span class="hljs-string">'pos'</span> + <span class="hljs-keyword">this</span>.XYZ[axes]] = currentDeg;
+
+                    axes += <span class="hljs-number">1</span>;
+                }
+            }
+
+            axes = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">while</span> (axes &lt; <span class="hljs-number">3</span>) {
+                currentDeg = <span class="hljs-keyword">this</span>[<span class="hljs-string">'pos'</span> + <span class="hljs-keyword">this</span>.XYZ[axes]];
+
+                styles += <span class="hljs-string">' rotate'</span> + <span class="hljs-keyword">this</span>.XYZ[axes] + <span class="hljs-string">'('</span> + currentDeg + <span class="hljs-string">'deg)'</span>;
+
+                axes += <span class="hljs-number">1</span>;
+            }
+
+            <span class="hljs-keyword">this</span>.$cube.style[prefix ? prefix + <span class="hljs-string">'Transform'</span> : <span class="hljs-string">'transform'</span>] = styles;
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <h4 id="rotate">Rotate</h4>
+<p>Start infinite rotation animation.</p>
+<ul>
+<li><p>parameters: <code>props</code> <strong>object</strong> Rotate options:</p>
+<ul>
+<li><p><code>startSide</code>   <strong>string</strong> Specify from which side should the cube start to animate.
+Possible options:</p>
+<ul>
+<li>side-1, side-2, side-3, side-4, side-5, side-6</li>
+</ul>
+</li>
+<li><p><code>speed[axis]</code> <strong>number</strong> Time in milliseconds in which the cube rotate around one axis (from 0 to 360 degrees).</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Usage example:</p>
+<pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
+
+<span class="hljs-comment">// Cube will start rotating</span>
+myCube.applyRotation({
+    startSide: <span class="hljs-string">'side-1'</span>,
+    speedX: <span class="hljs-number">5000</span>,  <span class="hljs-comment">// 5 seconds</span>
+    speedY: <span class="hljs-number">20000</span>, <span class="hljs-comment">// 20 seconds</span>
+    speedZ: <span class="hljs-number">10000</span>  <span class="hljs-comment">// 10 seconds</span>
+});
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        rotate: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(props)</span> {</span>
+            <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>,
+                dir = <span class="hljs-number">0</span>,
+                XYZ = <span class="hljs-keyword">this</span>.XYZ,
+                self = <span class="hljs-keyword">this</span>,
+                currentSpeed;
+
+            props = props || {};
+
+            self.isRotating = <span class="hljs-literal">true</span>;
+
+            <span class="hljs-keyword">if</span> (props.startSide &amp;&amp; self.sides[props.startSide] === <span class="hljs-literal">undefined</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-string">'You\'ve typed wrong value for "startSide" option.'</span>; }
+
+            self.isFocusing = <span class="hljs-literal">false</span>;
+
+            <span class="hljs-keyword">if</span> (!self.rotatePropsSet) {
+                <span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">3</span>) {
+                    <span class="hljs-keyword">if</span> (props.startSide) {
+                        props[<span class="hljs-string">'start'</span> + XYZ[i]] = self.sides[props.startSide][i];
+                    }
+
+                    self[<span class="hljs-string">'pos'</span> + XYZ[i]] = props[<span class="hljs-string">'start'</span> + XYZ[i]] || <span class="hljs-number">0</span>;
+
+                    currentSpeed = props[<span class="hljs-string">'speed'</span> + XYZ[i]];
+                    currentSpeed = currentSpeed === <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : (currentSpeed || <span class="hljs-number">360</span>);
+                    self[<span class="hljs-string">'speed'</span> + XYZ[i]] = currentSpeed;
+                    i += <span class="hljs-number">1</span>;
+                }
+
+                self.rotateDir = props.rotateDir || self.rotateDir;
+
+                self.rotatePropsSet = <span class="hljs-literal">true</span>;
+            }
+
+            <span class="hljs-keyword">if</span> (self.rotateDir === <span class="hljs-string">'left'</span>) { dir = -<span class="hljs-number">360</span>; }
+            <span class="hljs-keyword">if</span> (self.rotateDir === <span class="hljs-string">'right'</span>) { dir = <span class="hljs-number">360</span>; }
+
+            self._spinTo({
+                spinToX: props.startX ? props.startX + dir : dir,
+                spinToY: props.startY ? props.startY + dir : dir,
+                spinToZ: props.startZ ? props.startZ + dir : dir,
+                speedX: self.speedX,
+                speedY: self.speedY,
+                speedZ: self.speedZ,
+                timer: <span class="hljs-string">'rotate'</span>,
+                repeat: <span class="hljs-literal">true</span>,
+                easing: <span class="hljs-string">'linear'</span>
+            });
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <h4 id="focus-on">Focus On</h4>
+<p>Animate to the specified side of the cube on ‘mouseover’ or ‘touchstart’ event.</p>
+<ul>
+<li>parameters: <code>props</code> <strong>object</strong> focusOn options:<ul>
+<li><code>bounceBack</code>   <strong>boolean</strong> If set to true the cube will animate back to its last position (before focusOn animation), else it will stay at the focused postion.</li>
+<li><code>spinTo</code>       <strong>string</strong>  Specify to which side should the cube animate to. <strong>Note</strong> that this option will overwrite <code>spintTo[axis]</code>.</li>
+<li><code>spinTo[axis]</code> <strong>number</strong>  Specify to what degree each axis should animate to.</li>
+</ul>
+</li>
+</ul>
+<p>Usage example:</p>
+<pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
+
+<span class="hljs-comment">// Cube will rotate to selected face</span>
+<span class="hljs-comment">// either on 'touchstart' or 'mouseover' event.</span>
+myCube.focusOn({
+    bounceBack: <span class="hljs-literal">true</span>,
+    spinTo: <span class="hljs-string">'side-6'</span>
+});
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        focusOn: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(props)</span> {</span>
+            <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>,
+                isTouch = window.ontouchstart === <span class="hljs-literal">null</span>,
+                startEvent = isTouch ? <span class="hljs-string">'touchstart'</span> : <span class="hljs-string">'mouseover'</span>;
+
+            props = props || {};
+
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">focus</span><span class="hljs-params">()</span> {</span>
+                <span class="hljs-keyword">if</span> (props.bounceBack) {
+                    cancelAnimationFrame(self.timers.deFocus);
+                }
+
+                <span class="hljs-keyword">if</span> (!self.isFocusing) {
+                    self.snapshotX = self.posX;
+                    self.snapshotY = self.posY;
+                    self.snapshotZ = self.posZ;
+                }
+
+                <span class="hljs-keyword">if</span> (props.spinTo &amp;&amp; self.sides[props.spinTo] === <span class="hljs-literal">undefined</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-string">'You\'ve typed wrong value for "spinTo" option.'</span>; }
+
+                <span class="hljs-keyword">if</span> (props.spinTo &amp;&amp; self.sides[props.spinTo] !== <span class="hljs-literal">undefined</span>) {
+                    props.spinToX = self.sides[props.spinTo][<span class="hljs-number">0</span>];
+                    props.spinToY = self.sides[props.spinTo][<span class="hljs-number">1</span>];
+                    props.spinToZ = self.sides[props.spinTo][<span class="hljs-number">2</span>];
+                }
+
+                self._spinTo({
+                    spinToX: props.spinToX || <span class="hljs-number">0</span>,
+                    spinToY: props.spinToY || <span class="hljs-number">0</span>,
+                    spinToZ: props.spinToZ || <span class="hljs-number">0</span>,
+                    speed: props.speed || <span class="hljs-number">2000</span>,
+                    timer: <span class="hljs-string">'spinTo'</span>,
+                    easing: <span class="hljs-string">'out'</span>,
+                    callback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+                        self.$cube.className += <span class="hljs-string">' focused'</span>;
+                        self.hasFocused = <span class="hljs-literal">true</span>;
+                    }
+                });
+            }
+
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deFocus</span><span class="hljs-params">()</span> {</span>
+                cancelAnimationFrame(self.timers.spinTo);
+                cancelAnimationFrame(self.timers.rotate);
+
+                self._removeClass(self.$cube, <span class="hljs-string">'focused'</span>);
+                self.hasFocused = <span class="hljs-literal">false</span>;
+
+                <span class="hljs-keyword">if</span> (props.bounceBack) {
+                    self._spinTo({
+                        spinToX: self.snapshotX,
+                        spinToY: self.snapshotY,
+                        spinToZ: self.snapshotZ,
+                        speed: props.speed || <span class="hljs-number">2000</span>,
+                        timer: <span class="hljs-string">'deFocus'</span>,
+                        easing: <span class="hljs-string">'out'</span>,
+                        callback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+                            <span class="hljs-keyword">if</span> (self.isRotating) {
+                                self.rotate({
+                                    startX: self.posX,
+                                    startY: self.posY,
+                                    startZ: self.posZ
+                                });
+                            }
+                        }
+                    });
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (self.isRotating) {
+                    self.rotate({
+                        startX: self.posX,
+                        startY: self.posY,
+                        startZ: self.posZ
+                    });
+                }
+            }
+
+            self.$cube.addEventListener(startEvent, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(e)</span> {</span>
+                <span class="hljs-keyword">if</span> (self.hasFocused) { <span class="hljs-keyword">return</span>; }
+                e.preventDefault();
+                cancelAnimationFrame(self.timers.rotate);
+                focus();
+            });
+
+            self.$cube.addEventListener(<span class="hljs-string">'mouseout'</span>, deFocus);
+
+            <span class="hljs-keyword">if</span> (isTouch) {
+                document.addEventListener(<span class="hljs-string">'touchstart'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(e)</span> {</span>
+                    <span class="hljs-keyword">var</span> $target = e.target;
+                    <span class="hljs-keyword">if</span> (!self._hasParent($target, self.$cube)) { deFocus(); }
+                });
+            }
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <h3 id="private-methods">Private Methods</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <h4 id="spin-to">Spin To</h4>
+<p>Animate to the specified postion.</p>
+<ul>
+<li>parameters: <code>props</code> <strong>object</strong> spinTo options:<ul>
+<li><code>spinTo[axis]</code> <strong>number</strong>   Specify to what degree each axis should animate to.</li>
+<li><code>speed</code>        <strong>number</strong>   Time (in milliseconds) that specifies how long it will take to spin to given position. Overtwrites <code>speed[axis]</code>.</li>
+<li><code>speed[axis]</code>  <strong>number</strong>   Time (in milliseconds) that specifies how long it will take to spin to given position for each axis.</li>
+<li><code>timer</code>        <strong>string</strong>   Timer’s ID. It can be reseted if needed thus stoping spinTo loop. Timers are attached to public variable called <code>timers</code> (see in contructor).</li>
+<li><code>easing</code>       <strong>string</strong>   Name of easing function (available functions: ‘ease’, ‘out’, ‘inOut’)</li>
+<li><code>callback</code>     <strong>function</strong> Function which executes after spinTo is done.</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        _spinTo: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(props)</span> {</span>
+            <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>,
+                self = <span class="hljs-keyword">this</span>,
+                start = {},
+                speeds = [],
+                changeInValue = {},
+                changeInValueA = {},
+                changeInValueB = {},
+                dir = {},
+                done = {},
+                xyz = self.xyz,
+                XYZ = self.XYZ,
+                currentMax,
+                currentDeg,
+                currentSpeed,
+                currentIterator;
+
+            props.speed = self._calculateIterations(props.speed);
+
+            self.isFocusing = props.repeat ? <span class="hljs-literal">false</span> : <span class="hljs-literal">true</span>;
+
+            <span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">3</span>) {
+                start[xyz[i]] = self[<span class="hljs-string">'pos'</span> + XYZ[i]];
+
+                <span class="hljs-keyword">if</span> (props[<span class="hljs-string">'speed'</span> + XYZ[i]]) {
+                    props[<span class="hljs-string">'speed'</span> + XYZ[i]] = self._calculateIterations(props[<span class="hljs-string">'speed'</span> + XYZ[i]]);
+                }
+
+                <span class="hljs-keyword">if</span> (props.repeat) {
+                    changeInValue[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - props[<span class="hljs-string">'spinTo'</span> + XYZ[i]]);
+                } <span class="hljs-keyword">else</span> {
+                    changeInValueA[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - props[<span class="hljs-string">'spinTo'</span> + XYZ[i]]);
+                    changeInValueB[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - (props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] &gt;= <span class="hljs-number">0</span> ? props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] - <span class="hljs-number">360</span> : props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] + <span class="hljs-number">360</span>));
+
+                    <span class="hljs-keyword">if</span> (changeInValueA[xyz[i]] &lt; changeInValueB[xyz[i]]) {
+                        changeInValue[xyz[i]] = changeInValueA[xyz[i]];
+                    } <span class="hljs-keyword">else</span> {
+                        props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] -= <span class="hljs-number">360</span>;
+                        changeInValue[xyz[i]] = changeInValueB[xyz[i]];
+                    }
+                }
+
+                dir[xyz[i]] = start[xyz[i]] &lt; props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] ? <span class="hljs-string">'right'</span> : <span class="hljs-string">'left'</span>;
+                speeds.push(props.speed ? <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - props[<span class="hljs-string">'spinTo'</span> + XYZ[i]]) * props.speed / <span class="hljs-number">360</span>) : props[<span class="hljs-string">'speed'</span> + XYZ[i]]);
+
+                i += <span class="hljs-number">1</span>;
+            }
+
+            speeds.sort(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(a, b)</span> {</span> <span class="hljs-keyword">return</span> b - a; });
+            <span class="hljs-keyword">this</span>.iterators.spinTo = { x: <span class="hljs-number">0</span>, y: <span class="hljs-number">0</span>, z: <span class="hljs-number">0</span> };
+            props.easing = props.easing || <span class="hljs-string">'linear'</span>;
+
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> {</span>
+                i = <span class="hljs-number">0</span>;
+
+                <span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">3</span>) {
+                    currentMax = changeInValue[xyz[i]];
+                    currentSpeed = props.speed ? speeds[<span class="hljs-number">0</span>] : props[<span class="hljs-string">'speed'</span> + XYZ[i]];
+
+                    <span class="hljs-keyword">if</span> (currentMax !== <span class="hljs-number">0</span> &amp;&amp; currentSpeed !== <span class="hljs-number">0</span>) {
+                        currentDeg = self[<span class="hljs-string">'pos'</span> + XYZ[i]];
+                        currentIterator = self.iterators.spinTo[xyz[i]];
+
+                        currentDeg = currentSpeed === <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : self._ease[props.easing](currentIterator, <span class="hljs-number">0</span>, currentMax, currentSpeed);
+
+                        <span class="hljs-keyword">if</span> (dir[xyz[i]] === <span class="hljs-string">'right'</span>) {
+                            currentDeg += start[xyz[i]];
+                            currentMax += start[xyz[i]];
+
+                            <span class="hljs-keyword">if</span> (currentDeg &lt; currentMax) {
+                                currentIterator += <span class="hljs-number">1</span>;
+                            } <span class="hljs-keyword">else</span> {
+                                currentDeg = currentMax;
+                                done[xyz[i]] = <span class="hljs-literal">true</span>;
+                            }
+                        } <span class="hljs-keyword">else</span> {
+                            currentDeg = start[xyz[i]] - currentDeg;
+                            currentMax = start[xyz[i]] - currentMax;
+
+                            <span class="hljs-keyword">if</span> (currentDeg &gt; currentMax) {
+                                currentIterator += <span class="hljs-number">1</span>;
+                            } <span class="hljs-keyword">else</span> {
+                                currentDeg = currentMax;
+                                done[xyz[i]] = <span class="hljs-literal">true</span>;
+                            }
+                        }
+
+                        self[<span class="hljs-string">'pos'</span> + XYZ[i]] = currentDeg;
+                        self.iterators.spinTo[xyz[i]] = currentIterator;
+                    } <span class="hljs-keyword">else</span> {
+                        done[xyz[i]] = <span class="hljs-literal">true</span>;
+                    }
+
+                    i += <span class="hljs-number">1</span>;
+                }
+
+                self.applyRotation();
+
+                i = <span class="hljs-number">0</span>;
+
+                <span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">3</span>) {
+                    <span class="hljs-keyword">if</span> (done[xyz[i]] &amp;&amp; props.repeat) {
+                        self[<span class="hljs-string">'pos'</span> + XYZ[i]] = start[xyz[i]];
+                        self.iterators.spinTo[xyz[i]] = <span class="hljs-number">0</span>;
+                        done[xyz[i]] = <span class="hljs-literal">false</span>;
+                    }
+
+                    i += <span class="hljs-number">1</span>;                }
+
+                <span class="hljs-keyword">if</span> (done.x &amp;&amp; done.y &amp;&amp; done.z &amp;&amp; !props.repeat) {
+                    self.isFocusing = <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">if</span> (props.callback) { props.callback(); }
+                    <span class="hljs-keyword">return</span>;
+                }
+
+                self.timers[props.timer] = requestAnimationFrame(run);
+            }
+
+            run();
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <h4 id="easing-functions">Easing functions</h4>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        _ease: {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <h5 id="linear">Linear</h5>
+<ul>
+<li><code>parameters</code> (apply for all easing functions below):<ul>
+<li><code>currentIteration</code> <strong>number</strong>  Current iteration.</li>
+<li><code>startValue</code>       <strong>number</strong>  Start value. For example: ‘10’.</li>
+<li><code>changeInValue</code>    <strong>number</strong>  Change in value. For example ‘40’ means that if value started at 10, it would go up to 50.</li>
+<li><code>totalIterations</code>  <strong>number</strong>  Tells how many iterations should pass until the niamtion is done.</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            linear: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(currentIteration, startValue, changeInValue, totalIterations)</span> {</span>
+                <span class="hljs-keyword">return</span> changeInValue * currentIteration / totalIterations + startValue;
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <h5 id="out">Out</h5>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            out: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(currentIteration, startValue, changeInValue, totalIterations)</span> {</span> <span class="hljs-comment">// outCirc</span>
+                currentIteration = currentIteration / totalIterations - <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">return</span> changeInValue * <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-number">1</span> - <span class="hljs-built_in">Math</span>.pow(currentIteration, <span class="hljs-number">2</span>)) + startValue;
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <h5 id="in-out">In Out</h5>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            inOut: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(currentIteration, startValue, changeInValue, totalIterations)</span> {</span> <span class="hljs-comment">// inOutCirc</span>
+                <span class="hljs-keyword">return</span> changeInValue / <span class="hljs-number">2</span> * (<span class="hljs-number">1</span> - <span class="hljs-built_in">Math</span>.cos(<span class="hljs-built_in">Math</span>.PI * currentIteration / totalIterations)) + startValue;
+            }
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <h4 id="caluclate-iterations">Caluclate Iterations</h4>
+<p>Calculates approximate number of iterations.
+Converts milliseconds into number of animation frames for the cube.
+It’s assumed here that <code>requestAnimationFrame</code> will produce 60 frames per second.</p>
+<ul>
+<li>parameters: <code>milliseconds</code> <strong>number</strong> Time in milliseconds.</li>
+<li>return:                    <strong>number</strong> Returns number of iterations.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        _calculateIterations: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(milliseconds)</span> {</span>
+            <span class="hljs-keyword">return</span> milliseconds * <span class="hljs-number">60</span> / <span class="hljs-number">1000</span>;
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <h4 id="get-prefix">Get Prefix</h4>
+<p>Check if a browser prefix is necessary and, if it is, choose the right one.
+Test is based on <code>transform</code> property which necessary for the script ot work.</p>
+<ul>
+<li>return: <strong>Numeric</strong> Returns number of iterations.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        _getPrefix: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+            <span class="hljs-keyword">var</span> style = document.documentElement.style,
+                prefix;
+            <span class="hljs-keyword">if</span> (style.webkitTransform !== <span class="hljs-literal">undefined</span>) { prefix = <span class="hljs-string">'webkit'</span>; }
+            <span class="hljs-keyword">if</span> (style.mozTransform !== <span class="hljs-literal">undefined</span>) { prefix = <span class="hljs-string">'moz'</span>; }
+            <span class="hljs-keyword">if</span> (style.msTransform !== <span class="hljs-literal">undefined</span>) { prefix = <span class="hljs-string">'ms'</span>; }
+            <span class="hljs-keyword">return</span> prefix;
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <h4 id="has-parent">Has Parent</h4>
+<p>Check if one element (<code>$parentEl</code>) is parent of the second one (<code>$el</code>)</p>
+<ul>
+<li>parameters:<ul>
+<li><code>$el</code>       <strong>object</strong>  DOM element (assumed children).</li>
+<li><code>$parentEl</code> <strong>object</strong>  DOM element (assumed parent).</li>
+</ul>
+</li>
+<li>return:         <strong>boolean</strong> Returns true if <code>$parentEl</code> is <code>$el</code> parent.</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        _hasParent: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($el, $parentEl)</span> {</span>
+            <span class="hljs-keyword">var</span> $parentNode = $el.parentNode;
+
+            <span class="hljs-keyword">while</span> ($parentNode !== $parentEl &amp;&amp; $parentNode !== document) {
+                $parentNode = $parentNode.parentNode;
+            }
+
+            <span class="hljs-keyword">return</span> $parentNode === $parentEl ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <h4 id="remove-class">Remove Class</h4>
+<p>Remove CSS class from an element.</p>
+<ul>
+<li>parameters:<ul>
+<li><code>$el</code>       <strong>object</strong>  DOM element</li>
+<li><code>className</code> <strong>string</strong>  class’ name, example: <em>‘my-class’</em></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        _removeClass: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($el, className)</span> {</span>
+            <span class="hljs-keyword">var</span> regex = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">'\\b'</span> + className + <span class="hljs-string">'\\b'</span>, <span class="hljs-string">'g'</span>);
+            $el.className = $el.className.replace(regex, <span class="hljs-string">''</span>);
+        }
+    };
+}());</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
