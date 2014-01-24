@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 		},
 
 		jshint: {
-			files: ['js/cube.js']
+			files: ['cube.js']
 		},
 
 		uglify: {
@@ -43,12 +43,18 @@ module.exports = function(grunt) {
 			cube: {
 				src: ['cube.js'],
 				options: {
-					output: 'cube-js-docco'
+					output: 'cube-js-docco',
+					css: 'docco-css/docco.css'
 				}
 			}
 		},
 
 		watch: {
+			html: {
+				files: ['*.html'],
+				options: { livereload: true }
+			},
+
 			css: {
 				files: ['*.css', 'gh-pages-css/main.css'],
 				options: { livereload: true }

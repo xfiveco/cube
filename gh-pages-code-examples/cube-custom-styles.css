@@ -1,0 +1,7 @@
+.robot-cube {
+	margin: 80px 0;
+}
+
+.robot-cube > span {
+	background-image: url(../images/cube/cube-texture.png);
+}

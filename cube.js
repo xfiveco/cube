@@ -567,7 +567,8 @@
                         done[xyz[i]] = false;
                     }
 
-                    i += 1;                }
+                    i += 1;
+                }
 
                 if (done.x && done.y && done.z && !props.repeat) {
                     self.isFocusing = false;

@@ -7,90 +7,107 @@
 	<link rel="stylesheet" href="cube.css">
 </head>
 <body>
+	<script src="cube.min.js"></script>
+
 	<article class="content">
 		<header class="header">
 			<h1>cube.js</h1>
 			<p>cube.js is a light script which allows you to add fancy rotating CSS 3 cube to your page!</p>
 		</header>
 
-		<h2>Basic Instructions</h2>
-		<ol>
-			<li>
-				<p>Add either <a href="cube.js">cube.js</a> or <a href="cube.min.js">cube.min.js</a> script to your page.</p>
-				<p>Example: <code>&lt;script src=&quot;cube.min.js&quot;&gt;&lt;/script&gt;</code></p>
-			</li>
+		<section>
+			<h2>Basic Instructions</h2>
+			<ol>
+				<li>
+					<p>Add either <a href="cube.js">cube.js</a> or <a href="cube.min.js">cube.min.js</a> script to your page.</p>
+					<p>Example: <code>&lt;script src=&quot;cube.min.js&quot;&gt;&lt;/script&gt;</code></p>
+				</li>
 
-			<li>
-				<p>Add styles responsible for the cube to you stylesheet(s).</p>
-				<p><a href="cube.css">cube.css</a> or <a href="cube.scss">cube.scss</a> if you use Sass and Compass.</p>
-			</li>
+				<li>
+					<p>Add styles responsible for the cube to you stylesheet(s).</p>
+					<p><a href="cube.css">cube.css</a> or <a href="cube.scss">cube.scss</a> if you use Sass and Compass.</p>
+				</li>
 
-			<li class="language-markup">
-				<p>Add cube's markup to your HTML:</p>
-				<pre><code>&lt;div id=&quot;robot-cube&quot; class=&quot;robot-cube&quot;&gt;
-	&lt;span class=&quot;side-1&quot;&gt;&lt;/span&gt;
-	&lt;span class=&quot;side-2&quot;&gt;&lt;/span&gt;
-	&lt;span class=&quot;side-3&quot;&gt;&lt;/span&gt;
-	&lt;span class=&quot;side-4&quot;&gt;&lt;/span&gt;
-	&lt;span class=&quot;side-5&quot;&gt;&lt;/span&gt;
-	&lt;span class=&quot;side-6&quot;&gt;&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-			</li>
+				<li class="language-markup">
+					<p>Add cube's markup to your HTML:</p>
+					<pre data-src="gh-pages-code-examples/cube.html"></pre>
+				</li>
 
-			<li class="language-css">
-				<p>Add some styles to customise your cube:</p>
-				<pre><code>.robot-cube > span {
-	background-image: url(images/cube/cube-texture.png);
-}</code></pre>
-			</li>
+				<li class="language-css">
+					<p>Add some styles to customise your cube:</p>
+					<pre data-src="gh-pages-code-examples/cube-custom-styles.css"></pre>
+				</li>
 
-			<li class="language-javascript">
-				<p>Inititate the script:</p>
-				<pre><code>var myCube = new Cube('#robot-cube');
-	myCube.rotate({
-		speedX: 10000,
-		speedY: 10000,
-		speedZ: 10000,
-		startSide: 'side-1'
-});</code></pre>
-			</li>
+				<li class="language-javascript">
+					<p>Inititate the script:</p>
+					<pre data-src="gh-pages-code-examples/cube-init.js"></pre>
+				</li>
 
-			<li>
-				<p>And you are ready to go!</p>
+				<li>
+					<p>And you are ready to go!</p>
 
-				<div id="robot-cube" class="robot-cube">
-					<span class="side-1"></span>
-					<span class="side-2"></span>
-					<span class="side-3"></span>
-					<span class="side-4"></span>
-					<span class="side-5"></span>
-					<span class="side-6"></span>
-				</div>
-			</li>
-		</ol>
+					<div id="robot-cube" class="robot-cube">
+						<span class="side-1"></span>
+						<span class="side-2"></span>
+						<span class="side-3"></span>
+						<span class="side-4"></span>
+						<span class="side-5"></span>
+						<span class="side-6"></span>
+					</div>
+
+					<link rel="stylesheet" href="gh-pages-code-examples/cube-custom-styles.css"></link>
+					<script src="gh-pages-code-examples/cube-init.js"></script>
+				</li>
+			</ol>
+		</section>
+
+		<section>
+			<h2>Options</h2>
+
+			<h3>Apply Rotation</h3>
+
+			<p>Set rotation of the cube.</p>
+
+			<pre data-src="gh-pages-code-examples/cube-apply-rotation-options.js"></pre>
+
+			<h4>Example:</h4>
+
+			<pre data-src="gh-pages-code-examples/cube-apply-rotation.js"></pre>
+
+			<div id="robot-cube2" class="robot-cube">
+				<span class="side-1"></span>
+				<span class="side-2"></span>
+				<span class="side-3"></span>
+				<span class="side-4"></span>
+				<span class="side-5"></span>
+				<span class="side-6"></span>
+			</div>
+
+			<script src="gh-pages-code-examples/cube-apply-rotation.js"></script>
+
+			<h3>Rotate</h3>
+
+			<p>Start infinite rotation animation.</p>
+
+			<pre data-src="gh-pages-code-examples/cube-rotate-options.js"></pre>
+
+			<h4>Example:</h4>
+
+			<pre data-src="gh-pages-code-examples/cube-rotate.js"></pre>
+
+			<div id="robot-cube3" class="robot-cube">
+				<span class="side-1"></span>
+				<span class="side-2"></span>
+				<span class="side-3"></span>
+				<span class="side-4"></span>
+				<span class="side-5"></span>
+				<span class="side-6"></span>
+			</div>
+
+			<script src="gh-pages-code-examples/cube-rotate.js"></script>
+		</section>
 	</article>
 
 	<script src="gh-pages-js/prism.js"></script>
-	<script src="cube.min.js"></script>
-	<script>
-		var myCube = new Cube('#robot-cube');
-
-		myCube.rotate({
-			speedX: 10000,
-			speedY: 10000,
-			speedZ: 10000,
-			startSide: 'side-1'
-		});
-	</script>
-
-	<style>
-		.robot-cube {
-			margin-top: 50px;
-		}
-
-		.robot-cube > span {
-			background-image: url(images/cube/cube-texture.png);
-		}
-	</style>
 </body>
 </html>
