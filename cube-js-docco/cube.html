@@ -598,14 +598,17 @@ is <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/perspective">perspe
               <h4 id="apply-rotation">Apply rotation</h4>
 <p>Set rotation of the cube.</p>
 <ul>
-<li>parameters: <code>props</code> <strong>object</strong> Rotation of each axis in the following format:<pre><code>{
+<li><p>parameters: <code>props</code> <strong>object</strong> Rotation of each axis in the following format:</p>
+<pre><code>{
    x: [number from <span class="hljs-number">0</span> to <span class="hljs-number">360</span>],
    y: [number from <span class="hljs-number">0</span> to <span class="hljs-number">360</span>],
    z: [number from <span class="hljs-number">0</span> to <span class="hljs-number">360</span>]
 }
+</code></pre><p>or predefined side string:</p>
+<pre><code>{ side: <span class="hljs-string">'side-3'</span> }
 </code></pre></li>
 </ul>
-<p>Usage example:</p>
+<p>Usage examples:</p>
 <pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
 
 <span class="hljs-comment">// Set the cube's postion</span>
@@ -614,6 +617,10 @@ myCube.applyRotation({
     y: <span class="hljs-number">30</span>,
     z: <span class="hljs-number">270</span>
 });
+</code></pre><pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
+
+<span class="hljs-comment">// Set the cube's postion</span>
+myCube.applyRotation({ side: <span class="hljs-string">'side-4'</span> });
 </code></pre>
             </div>
             
@@ -623,10 +630,22 @@ myCube.applyRotation({
                 currentDeg,
                 axes = <span class="hljs-number">0</span>;
 
-            <span class="hljs-keyword">if</span> (props) {
+            props = props || {};
+
+            <span class="hljs-keyword">if</span> (props.x &amp;&amp; props.y &amp;&amp; props.z) {
                 <span class="hljs-keyword">while</span> (axes &lt; <span class="hljs-number">3</span>) {
                     currentDeg = props[<span class="hljs-keyword">this</span>.xyz[axes]];
                     currentDeg = <span class="hljs-built_in">isNaN</span>(currentDeg) ? <span class="hljs-number">0</span> : currentDeg;
+
+                    <span class="hljs-keyword">this</span>[<span class="hljs-string">'pos'</span> + <span class="hljs-keyword">this</span>.XYZ[axes]] = currentDeg;
+
+                    axes += <span class="hljs-number">1</span>;
+                }
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (props.side) {
+                <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.sides[props.side]) { <span class="hljs-keyword">throw</span> <span class="hljs-string">'You\'ve probably entered wrong string as a "side" in "applyRotation". Try "side-1", "side-2", "side-3", "side-4", "side-5", or "side-6"'</span>; }
+
+                <span class="hljs-keyword">while</span> (axes &lt; <span class="hljs-number">3</span>) {
+                    currentDeg = <span class="hljs-keyword">this</span>.sides[props.side][axes];
 
                     <span class="hljs-keyword">this</span>[<span class="hljs-string">'pos'</span> + <span class="hljs-keyword">this</span>.XYZ[axes]] = currentDeg;
 
@@ -668,6 +687,7 @@ Possible options:</p>
 </li>
 <li><p><code>speed[axis]</code> <strong>number</strong> Time in milliseconds in which the cube rotate around one axis (from 0 to 360 degrees).</p>
 </li>
+<li><code>rotateDir</code> <strong>string</strong> Can be ‘left’ or ‘right’.</li>
 </ul>
 </li>
 </ul>
@@ -675,11 +695,12 @@ Possible options:</p>
 <pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
 
 <span class="hljs-comment">// Cube will start rotating</span>
-myCube.applyRotation({
+myCube.rotate({
     startSide: <span class="hljs-string">'side-1'</span>,
     speedX: <span class="hljs-number">5000</span>,  <span class="hljs-comment">// 5 seconds</span>
     speedY: <span class="hljs-number">20000</span>, <span class="hljs-comment">// 20 seconds</span>
     speedZ: <span class="hljs-number">10000</span>  <span class="hljs-comment">// 10 seconds</span>
+    rotateDir: <span class="hljs-string">'left'</span>
 });
 </code></pre>
             </div>
@@ -692,6 +713,8 @@ myCube.applyRotation({
                 currentSpeed;
 
             props = props || {};
+
+            self.rotateDir = props.rotateDir || self.rotateDir;
 
             self.isRotating = <span class="hljs-literal">true</span>;
 
@@ -926,12 +949,21 @@ myCube.focusOn({
                     changeInValue[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - props[<span class="hljs-string">'spinTo'</span> + XYZ[i]]);
                 } <span class="hljs-keyword">else</span> {
                     changeInValueA[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - props[<span class="hljs-string">'spinTo'</span> + XYZ[i]]);
-                    changeInValueB[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - (props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] &gt;= <span class="hljs-number">0</span> ? props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] - <span class="hljs-number">360</span> : props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] + <span class="hljs-number">360</span>));
+                    <span class="hljs-keyword">if</span> (start[xyz[i]] &gt; props[<span class="hljs-string">'spinTo'</span> + XYZ[i]]) {
+                        changeInValueB[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] - <span class="hljs-number">360</span>);
+                    } <span class="hljs-keyword">else</span> {
+                        changeInValueB[xyz[i]] = <span class="hljs-built_in">Math</span>.abs(start[xyz[i]] - props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] + <span class="hljs-number">360</span>);
+                    }
 
                     <span class="hljs-keyword">if</span> (changeInValueA[xyz[i]] &lt; changeInValueB[xyz[i]]) {
                         changeInValue[xyz[i]] = changeInValueA[xyz[i]];
                     } <span class="hljs-keyword">else</span> {
-                        props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] -= <span class="hljs-number">360</span>;
+                        <span class="hljs-keyword">if</span> (start[xyz[i]] &gt; props[<span class="hljs-string">'spinTo'</span> + XYZ[i]]) {
+                            props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] += <span class="hljs-number">360</span>;
+                        } <span class="hljs-keyword">else</span> {
+                            props[<span class="hljs-string">'spinTo'</span> + XYZ[i]] -= <span class="hljs-number">360</span>;
+                        }
+
                         changeInValue[xyz[i]] = changeInValueB[xyz[i]];
                     }
                 }

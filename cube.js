@@ -225,8 +225,13 @@
         //      z: [number from 0 to 360]
         //   }
         //   ```
+        //   or predefined side string:
         //   
-        // Usage example:
+        //   ```
+        //   { side: 'side-3' }
+        //   ```
+        //   
+        // Usage examples:
         // ```
         // var myCube = Cube('.my .selector');
         // 
@@ -237,16 +242,35 @@
         //     z: 270
         // });
         // ```
+        // 
+        // ```
+        // var myCube = Cube('.my .selector');
+        // 
+        // // Set the cube's postion
+        // myCube.applyRotation({ side: 'side-4' });
+        // ```
         applyRotation: function (props) {
             var prefix = this._getPrefix(),
                 styles = 'perspective(' + this.props.perspective + 'px)',
                 currentDeg,
                 axes = 0;
 
-            if (props) {
+            props = props || {};
+
+            if (props.x && props.y && props.z) {
                 while (axes < 3) {
                     currentDeg = props[this.xyz[axes]];
                     currentDeg = isNaN(currentDeg) ? 0 : currentDeg;
+
+                    this['pos' + this.XYZ[axes]] = currentDeg;
+
+                    axes += 1;
+                }
+            } else if (props.side) {
+                if (!this.sides[props.side]) { throw 'You\'ve probably entered wrong string as a "side" in "applyRotation". Try "side-1", "side-2", "side-3", "side-4", "side-5", or "side-6"'; }
+
+                while (axes < 3) {
+                    currentDeg = this.sides[props.side][axes];
 
                     this['pos' + this.XYZ[axes]] = currentDeg;
 
@@ -275,17 +299,19 @@
         //         - side-1, side-2, side-3, side-4, side-5, side-6
         //         
         //     - `speed[axis]` __number__ Time in milliseconds in which the cube rotate around one axis (from 0 to 360 degrees).
+        //     - `rotateDir` __string__ Can be 'left' or 'right'.
         //     
         // Usage example:
         // ```
         // var myCube = Cube('.my .selector');
         // 
         // // Cube will start rotating
-        // myCube.applyRotation({
+        // myCube.rotate({
         //     startSide: 'side-1',
         //     speedX: 5000,  // 5 seconds
         //     speedY: 20000, // 20 seconds
         //     speedZ: 10000  // 10 seconds
+        //     rotateDir: 'left'
         // });
         // ```
         rotate: function (props) {
@@ -296,6 +322,8 @@
                 currentSpeed;
 
             props = props || {};
+
+            self.rotateDir = props.rotateDir || self.rotateDir;
 
             self.isRotating = true;
 
@@ -492,12 +520,21 @@
                     changeInValue[xyz[i]] = Math.abs(start[xyz[i]] - props['spinTo' + XYZ[i]]);
                 } else {
                     changeInValueA[xyz[i]] = Math.abs(start[xyz[i]] - props['spinTo' + XYZ[i]]);
-                    changeInValueB[xyz[i]] = Math.abs(start[xyz[i]] - (props['spinTo' + XYZ[i]] >= 0 ? props['spinTo' + XYZ[i]] - 360 : props['spinTo' + XYZ[i]] + 360));
+                    if (start[xyz[i]] > props['spinTo' + XYZ[i]]) {
+                        changeInValueB[xyz[i]] = Math.abs(start[xyz[i]] - props['spinTo' + XYZ[i]] - 360);
+                    } else {
+                        changeInValueB[xyz[i]] = Math.abs(start[xyz[i]] - props['spinTo' + XYZ[i]] + 360);
+                    }
 
                     if (changeInValueA[xyz[i]] < changeInValueB[xyz[i]]) {
                         changeInValue[xyz[i]] = changeInValueA[xyz[i]];
                     } else {
-                        props['spinTo' + XYZ[i]] -= 360;
+                        if (start[xyz[i]] > props['spinTo' + XYZ[i]]) {
+                            props['spinTo' + XYZ[i]] += 360;
+                        } else {
+                            props['spinTo' + XYZ[i]] -= 360;
+                        }
+
                         changeInValue[xyz[i]] = changeInValueB[xyz[i]];
                     }
                 }

@@ -1,0 +1,1 @@
+{ side: ['side-1', 'side-2', …, or 'side-6'] }

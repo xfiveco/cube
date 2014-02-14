@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 		},
 
 		jshint: {
-			files: ['cube.js']
+			files: ['cube.js', 'gh-pages-js/generate-nav.js']
 		},
 
 		uglify: {
@@ -73,6 +73,12 @@ module.exports = function(grunt) {
 			cubeJs: {
 				files: ['cube.js'],
 				tasks: ['jshint', 'docco:cube', 'uglify:cube'],
+				options: { livereload: true }
+			},
+
+			pagesJs: {
+				files: ['gh-pages-js/*.js'],
+				tasks: ['jshint'],
 				options: { livereload: true }
 			}
 		}
