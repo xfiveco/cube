@@ -1,4 +1,4 @@
-var myCube = Cube('#robot-cube4c');
+var myCube = Cube('#the-cube4c');
 
 // Start rotating
 myCube.rotate({

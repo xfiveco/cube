@@ -1,4 +1,4 @@
-var myCube = new Cube('#robot-cube');
+var myCube = new Cube('#the-cube');
 
 	myCube.rotate({
 		speedX: 10000,

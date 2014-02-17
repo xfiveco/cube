@@ -1,7 +1,7 @@
-.robot-cube {
+.the-cube {
 	margin: 80px auto;
 }
 
-.robot-cube > span {
+.the-cube > span {
 	background-image: url(../images/cube/cube-texture.png);
 }

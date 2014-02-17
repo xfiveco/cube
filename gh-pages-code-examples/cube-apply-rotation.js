@@ -1,4 +1,4 @@
-var myCube = Cube('#robot-cube2');
+var myCube = Cube('#the-cube2');
 
 // Set the cube's postion
 myCube.applyRotation({

@@ -155,7 +155,7 @@
         // ### Public variables
 
         // * `$cube`          __object__  A DOM element which is supposed to be a cube.
-        this.$cube = document.querySelector(selector || '#robot-cube');
+        this.$cube = document.querySelector(selector || '#the-cube');
 
         // * `props`          __object__  Options publicly available for methods.
         this.props = props;

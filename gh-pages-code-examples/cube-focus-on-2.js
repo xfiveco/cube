@@ -1,4 +1,4 @@
-var myCube = Cube('#robot-cube4a');
+var myCube = Cube('#the-cube4a');
 
 // Cube will spin to the selected side
 myCube.focusOn({

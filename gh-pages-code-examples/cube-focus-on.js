@@ -1,4 +1,4 @@
-var myCube = Cube('#robot-cube4');
+var myCube = Cube('#the-cube4');
 
 // Cube will spin to the selected side
 // and back to the previous position

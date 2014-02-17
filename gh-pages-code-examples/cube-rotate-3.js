@@ -1,4 +1,4 @@
-var myCube = Cube('#robot-cube3b');
+var myCube = Cube('#the-cube3b');
 
 // Cube will start rotating only on one axis
 // to the left
