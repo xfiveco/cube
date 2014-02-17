@@ -2,12 +2,17 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>Cube - XHTMLized script</title>
+
 	<link rel="stylesheet" href="gh-pages-css/main.css">
 	<link rel="stylesheet" href="cube.css">
 </head>
-<body>
+<body id="document-top">
 	<script src="cube.js"></script>
+
+	<div class="js-insert-nav"></div>
 
 	<article class="content">
 		<header class="header">
@@ -15,10 +20,13 @@
 			<p>cube.js is a light script which allows you to add fancy rotating CSS3 cube to your page!</p>
 		</header>
 
-		<div class="js-insert-nav"></div>
+		<div class="compatibility-alert"></div>
 
-		<section>
-			<h2>Basic Instructions</h2>
+		<section id="quick-start">
+			<h2>Quick Start</h2>
+
+			<p>Please check <a href="#compatibility">compatibity notes</a> before using the script.</p>
+
 			<ol>
 				<li>
 					<p>Add either <a href="cube.js">cube.js</a> or <a href="cube.min.js">cube.min.js</a> script to your page.</p>
@@ -26,7 +34,7 @@
 				</li>
 
 				<li>
-					<p>Add styles responsible for the cube to you stylesheet(s).</p>
+					<p>Add styles responsible for the cube to you stylesheet(s). Examplary background image can be found <a href="#get-texture">here</a>.</p>
 					<p><a href="cube.css">cube.css</a> or <a href="cube.scss">cube.scss</a> if you use Sass and Compass.</p>
 				</li>
 
@@ -63,167 +71,203 @@
 			</ol>
 		</section>
 
-		<section>
+		<section id="options">
 			<h2>Options</h2>
 
-			<h3>Apply Rotation</h3>
+			<section id="apply-rotation">
+				<h3>Apply Rotation</h3>
 
-			<p>Set rotation of the cube.</p>
+				<p>Set rotation of the cube.</p>
 
-			<pre data-src="gh-pages-code-examples/cube-apply-rotation-options.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-apply-rotation-options.js"></pre>
 
-			<p>or</p>
+				<p>or</p>
 
-			<pre data-src="gh-pages-code-examples/cube-apply-rotation-options-2.js"></pre>			
+				<pre data-src="gh-pages-code-examples/cube-apply-rotation-options-2.js"></pre>			
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-apply-rotation.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-apply-rotation.js"></pre>
 
-			<div id="robot-cube2" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube2" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-apply-rotation.js"></script>
+				<script src="gh-pages-code-examples/cube-apply-rotation.js"></script>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-apply-rotation-2.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-apply-rotation-2.js"></pre>
 
-			<div id="robot-cube2a" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube2a" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-apply-rotation-2.js"></script>
+				<script src="gh-pages-code-examples/cube-apply-rotation-2.js"></script>
+			</section>
 
-			<h3>Rotate</h3>
+			<section id="rotate">
+				<h3>Rotate</h3>
 
-			<p>Start infinite rotation animation.</p>
+				<p>Start infinite rotation animation.</p>
 
-			<pre data-src="gh-pages-code-examples/cube-rotate-options.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-rotate-options.js"></pre>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-rotate.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-rotate.js"></pre>
 
-			<div id="robot-cube3" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube3" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-rotate.js"></script>
+				<script src="gh-pages-code-examples/cube-rotate.js"></script>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-rotate-2.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-rotate-2.js"></pre>
 
-			<div id="robot-cube3a" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube3a" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-rotate-2.js"></script>
+				<script src="gh-pages-code-examples/cube-rotate-2.js"></script>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-rotate-3.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-rotate-3.js"></pre>
 
-			<div id="robot-cube3b" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube3b" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-rotate-3.js"></script>
+				<script src="gh-pages-code-examples/cube-rotate-3.js"></script>
+			</section>
 
-			<h3>Focus On</h3>
+			<section id="focus-on">
+				<h3>Focus On</h3>
 
-			<p>Animate to the specified side of the cube on ‘mouseover’ or ‘touchstart’ event.</p>
+				<p>Animate to the specified side of the cube on ‘mouseover’ or ‘touchstart’ event.</p>
 
-			<pre data-src="gh-pages-code-examples/cube-focus-on-options.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-focus-on-options.js"></pre>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-focus-on.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-focus-on.js"></pre>
 
-			<div id="robot-cube4" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube4" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-focus-on.js"></script>
+				<script src="gh-pages-code-examples/cube-focus-on.js"></script>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-focus-on-2.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-focus-on-2.js"></pre>
 
-			<div id="robot-cube4a" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube4a" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-focus-on-2.js"></script>
+				<script src="gh-pages-code-examples/cube-focus-on-2.js"></script>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-focus-on-3.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-focus-on-3.js"></pre>
 
-			<div id="robot-cube4b" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube4b" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-focus-on-3.js"></script>
+				<script src="gh-pages-code-examples/cube-focus-on-3.js"></script>
 
-			<h4>Example:</h4>
+				<h4>Example:</h4>
 
-			<pre data-src="gh-pages-code-examples/cube-focus-on-4.js"></pre>
+				<pre data-src="gh-pages-code-examples/cube-focus-on-4.js"></pre>
 
-			<div id="robot-cube4c" class="robot-cube">
-				<span class="side-1"></span>
-				<span class="side-2"></span>
-				<span class="side-3"></span>
-				<span class="side-4"></span>
-				<span class="side-5"></span>
-				<span class="side-6"></span>
-			</div>
+				<div id="robot-cube4c" class="robot-cube">
+					<span class="side-1"></span>
+					<span class="side-2"></span>
+					<span class="side-3"></span>
+					<span class="side-4"></span>
+					<span class="side-5"></span>
+					<span class="side-6"></span>
+				</div>
 
-			<script src="gh-pages-code-examples/cube-focus-on-4.js"></script>			
+				<script src="gh-pages-code-examples/cube-focus-on-4.js"></script>
+			</section>
+		</section>
+
+		<section id="get-texture">
+			<h2>Cube Texture</h2>
+
+			<p>Below you can see exemplary image used on this page. Feel free to use it as an template for your own cube. You can find a PSD template <a href="images/cube/cube-texture.psd">here</a>.</p>
+
+			<p>
+				<strong>Note:</strong><br>
+				The cube texture doesn't have to have the exact size as the image presented here. You can decrease/increase its resolution as long as the <strong>image ratio</strong> is correct.
+			</p>
+
+			<img src="images/cube/cube-texture.png" alt="Cube Texture">
+		</section>
+
+		<section id="compatibility">
+			<h2>Compatibility</h2>
+
+			<p>Please mind that this script uses CSS 3d to render the cube. This means that <strong>the script won't work on any IE</strong> available so far. It's because of lack of support for <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style">preserve-3d</a> CSS property.</p>
+
+			<p>It's also possible that with some browsers/OS combinations rendering of 3d CSS is not possible. Hence it's important to <strong>always use a fallback</strong>.</p>
+
+			<p><strong>The script adds <em>.cube-3d-available</em> class at the top of the document if it can work.</strong></p>
+		</section>
+
+		<section id="documentation">
+			<h2>Documentation</h2>
+			<p>If you'd like to take a closer look at the code visit <a href="https://github.com/xhtmlized/cube">GitHub</a> or check <a href="cube-js-docco/cube.html">the documentation</a>.
 		</section>
 	</article>
+
+	<a href="#document-top" class="back-to-the-top">Back to the top</a>
 
 	<script src="gh-pages-js/prism.js"></script>
 	<script src="gh-pages-js/generate-nav.js"></script>

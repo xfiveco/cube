@@ -27,6 +27,9 @@ $colorBase: #666;
 $colorDistinct: #D8D8D8;
 $colorNeutral: #F8F8FF;
 $colorLink: #39F;
+$colorImportant: #F04C23;
+
+$topNavHeight: 45px;
 
 
 // COMMON
@@ -37,21 +40,22 @@ $colorLink: #39F;
 // --------------------------------------------------------------------------------
 
 .content {
-	color: $colorBase;
 	margin: 2em auto 10em;
 	padding: 0 1em;
 	max-width: 640px;
+	color: $colorBase;
+	line-height: 1.5;
 
 	code {
-		background: $colorNeutral;
-		border: 1px solid darken($colorNeutral, 5%);
 		padding: 0 .2em;
+		border: 1px solid darken($colorNeutral, 5%);
+		background: $colorNeutral;
 	}
 
 	pre code {
-		background: none;
-		border: 0 none;
 		padding: auto;
+		border: 0 none;
+		background: none;
 	}
 
 	a {
@@ -59,6 +63,16 @@ $colorLink: #39F;
 
 		&:hover { text-decoration: none; }
 	}
+
+	section {
+		padding-top: $topNavHeight;
+
+		@media only screen and (max-width: 768px) {
+			padding-top: 0;
+		}
+	}
+
+	img { max-width: 100%; }
 }
 
 
@@ -68,11 +82,210 @@ $colorLink: #39F;
 .header {
 	margin-bottom: 40px;
 	border-bottom: 1px solid $colorDistinct;
+	line-height: 1.25;
 
 	h1 {
-		color: #F04C23;
-		font-size: 4em
+		color: $colorImportant;
+		font-size: 4em;
 	}
 
 	p { font-size: 2em; }
+}
+
+
+// Block Nav
+// --------------------------------------------------------------------------------
+
+.block-nav {
+	$height: $topNavHeight;
+	$colorBg: lighten($colorDistinct, 5%);
+	$colorDefault: #999;
+	$colorActive: #424242;
+	$dropdownWidth: 205px;
+	$itemPaddingL: 11px;
+
+	position: relative;
+	z-index: 2000;
+	height: $height;
+
+	ul {
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin: 0;
+		padding-left: 0;
+		width: 100%;
+		border-bottom: 1px solid $colorBg;
+		background: #fff;
+		background: rgba(#fff, .7);
+		text-align: center;
+	}
+
+	li {
+		position: relative;
+		display: inline-block;
+		margin: 0 10px;
+		list-style: none;
+		line-height: 1;
+	}
+
+	a {
+		display: block;
+		margin-bottom: -1px;
+		padding: 15px $itemPaddingL;
+		color: $colorDefault;
+		text-decoration: none;
+
+		&:hover {
+			color: $colorActive;
+			text-decoration: underline;
+		}
+	}
+
+	.dropdown {
+		& > a:after {
+			display: inline-block;
+			content: "";
+			margin-left: .5em;
+			width: 0;
+			height: 0;
+			border-top: 8px solid $colorDefault;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+		}
+
+		& > a:hover:after { border-top-color: $colorActive; }
+
+		ul {
+			position: absolute;
+			top: $height;
+			left: -9999em;
+			width: $dropdownWidth;
+			background: $colorBg;
+
+			a {
+				position: relative;
+
+				&:before {
+					position: absolute;
+					top: 0;
+					left: $itemPaddingL;
+					display: block;
+					width: $dropdownWidth - $itemPaddingL * 2;
+					height: 1px;
+					background: $colorDistinct;
+					content: "";
+				}
+			}
+		}
+
+		li {
+			display: block;
+			margin: 0;
+			text-align: left;
+
+			&:first-child a:before { display: none; }
+		}
+
+		&:hover {
+			background: $colorBg;
+
+			ul { left: 0; }
+
+			&> a {
+				color: $colorActive;
+				text-decoration: none;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 768px) {
+		height: auto;
+
+		ul {
+			border: 0 none;
+			text-align: left;
+			position: relative;
+		}
+
+		li {
+			display: block;
+		}
+
+		a {
+			border-top: 1px solid $colorBg;
+			border-bottom: 1px solid $colorBg;
+			margin-bottom: -1px;
+
+			&:hover { text-decoration: none; }
+		}
+
+		.dropdown {
+			& > a:after { display: none; }
+
+			&:hover { background: none; }
+
+			 ul {
+				width: auto;
+				background: none;
+				position: relative;
+				left: 0;
+				top: 0;
+
+				a { padding-left: 2em; }
+
+				a:before { display: none; }
+			}
+		}
+	}
+}
+
+
+// Compatibility Alert
+// --------------------------------------------------------------------------------
+
+.compatibility-alert:before {
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	max-width: 320px;
+	color: $colorImportant;
+	content: "Looks like your browser is not capable of rendering CSS 3d cube. :(";
+	font-weight: bold;
+	font-size: 1.5em;
+	line-height: 1.25;
+
+	.cube-3d-available & {
+		content: "";
+		display: none;
+	}
+}
+
+// Back to the top
+// --------------------------------------------------------------------------------
+
+.back-to-the-top {
+	@include hide-text;
+
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	width: 40px;
+	height: 40px;
+	background: $colorDistinct;
+
+	&:hover { background: darken($colorDistinct, 10%); }
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -10px 0 0 -15px;
+		width: 0;
+		height: 0;
+		border-bottom: 15px solid $colorNeutral;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+	}
 }
