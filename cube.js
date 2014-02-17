@@ -1,6 +1,6 @@
 // Allows to manipulate the cube created using CSS and HTML.
 // 
-// author: __XHTMLized__
+// author:  Artur Kot (artur.kot@xhtmlized.com)
 
 /*jshint browser: true, smarttabs: false, indent: 4, undef: true, unused: true, strict: true, trailing: true, onevar: true, white: true */
 /*globals requestAnimationFrame, cancelAnimationFrame*/
