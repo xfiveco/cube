@@ -28,7 +28,7 @@
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <p>Allows to manipulate the cube created using CSS and HTML.</p>
-<p>author: <strong>XHTMLized</strong></p>
+<p>author:  Artur Kot (artur.kot@xhtmlized.com)</p>
 
             </div>
             
@@ -247,7 +247,7 @@ the function below):</p>
 <li><code>props</code>    <strong>object</strong>                  The cube’s options passed to the constructor.</li>
 </ul>
 </li>
-<li>return         <strong>function</strong>  or <strong>object</strong> If the cube can be fired <code>Cube</code> will return new isntance of <code>Cube.instance</code> constructor else it will return object with empty methods.</li>
+<li>return         <strong>function</strong>  or <strong>object</strong> If the cube can be fired <code>Cube</code> will return new instance of <code>Cube.instance</code> constructor else it will return object with empty methods.</li>
 </ul>
 
             </div>
@@ -487,7 +487,7 @@ is <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/perspective">perspe
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <ul>
-<li><code>hasFocused</code>     <strong>boolean</strong> True if cube has roteted to the selected side. See <code>focusOn</code> method.</li>
+<li><code>hasFocused</code>     <strong>boolean</strong> True if cube has rotated to the selected side. See <code>focusOn</code> method.</li>
 </ul>
 
             </div>
@@ -611,7 +611,7 @@ is <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/perspective">perspe
 <p>Usage examples:</p>
 <pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
 
-<span class="hljs-comment">// Set the cube's postion</span>
+<span class="hljs-comment">// Set the cube's position</span>
 myCube.applyRotation({
     x: <span class="hljs-number">45</span>,
     y: <span class="hljs-number">30</span>,
@@ -619,7 +619,7 @@ myCube.applyRotation({
 });
 </code></pre><pre><code><span class="hljs-keyword">var</span> myCube = Cube(<span class="hljs-string">'.my .selector'</span>);
 
-<span class="hljs-comment">// Set the cube's postion</span>
+<span class="hljs-comment">// Set the cube's position</span>
 myCube.applyRotation({ side: <span class="hljs-string">'side-4'</span> });
 </code></pre>
             </div>
@@ -770,7 +770,7 @@ myCube.rotate({
 <p>Animate to the specified side of the cube on ‘mouseover’ or ‘touchstart’ event.</p>
 <ul>
 <li>parameters: <code>props</code> <strong>object</strong> focusOn options:<ul>
-<li><code>bounceBack</code>   <strong>boolean</strong> If set to true the cube will animate back to its last position (before focusOn animation), else it will stay at the focused postion.</li>
+<li><code>bounceBack</code>   <strong>boolean</strong> If set to true the cube will animate back to its last position (before focusOn animation), else it will stay at the focused position.</li>
 <li><code>spinTo</code>       <strong>string</strong>  Specify to which side should the cube animate to. <strong>Note</strong> that this option will overwrite <code>spintTo[axis]</code>.</li>
 <li><code>spinTo[axis]</code> <strong>number</strong>  Specify to what degree each axis should animate to.</li>
 </ul>
@@ -902,13 +902,13 @@ myCube.focusOn({
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <h4 id="spin-to">Spin To</h4>
-<p>Animate to the specified postion.</p>
+<p>Animate to the specified position.</p>
 <ul>
 <li>parameters: <code>props</code> <strong>object</strong> spinTo options:<ul>
 <li><code>spinTo[axis]</code> <strong>number</strong>   Specify to what degree each axis should animate to.</li>
-<li><code>speed</code>        <strong>number</strong>   Time (in milliseconds) that specifies how long it will take to spin to given position. Overtwrites <code>speed[axis]</code>.</li>
+<li><code>speed</code>        <strong>number</strong>   Time (in milliseconds) that specifies how long it will take to spin to given position. Overwrites <code>speed[axis]</code>.</li>
 <li><code>speed[axis]</code>  <strong>number</strong>   Time (in milliseconds) that specifies how long it will take to spin to given position for each axis.</li>
-<li><code>timer</code>        <strong>string</strong>   Timer’s ID. It can be reseted if needed thus stoping spinTo loop. Timers are attached to public variable called <code>timers</code> (see in contructor).</li>
+<li><code>timer</code>        <strong>string</strong>   Timer’s ID. It can be reset if needed thus stopping spinTo loop. Timers are attached to public variable called <code>timers</code> (see in constructor).</li>
 <li><code>easing</code>       <strong>string</strong>   Name of easing function (available functions: ‘ease’, ‘out’, ‘inOut’)</li>
 <li><code>callback</code>     <strong>function</strong> Function which executes after spinTo is done.</li>
 </ul>
@@ -1078,7 +1078,7 @@ myCube.focusOn({
 <li><code>currentIteration</code> <strong>number</strong>  Current iteration.</li>
 <li><code>startValue</code>       <strong>number</strong>  Start value. For example: ‘10’.</li>
 <li><code>changeInValue</code>    <strong>number</strong>  Change in value. For example ‘40’ means that if value started at 10, it would go up to 50.</li>
-<li><code>totalIterations</code>  <strong>number</strong>  Tells how many iterations should pass until the niamtion is done.</li>
+<li><code>totalIterations</code>  <strong>number</strong>  Tells how many iterations should pass until the animation is done.</li>
 </ul>
 </li>
 </ul>
@@ -1134,7 +1134,7 @@ myCube.focusOn({
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
-              <h4 id="caluclate-iterations">Caluclate Iterations</h4>
+              <h4 id="calculate-iterations">Calculate Iterations</h4>
 <p>Calculates approximate number of iterations.
 Converts milliseconds into number of animation frames for the cube.
 It’s assumed here that <code>requestAnimationFrame</code> will produce 60 frames per second.</p>
@@ -1160,7 +1160,7 @@ It’s assumed here that <code>requestAnimationFrame</code> will produce 60 fram
               </div>
               <h4 id="get-prefix">Get Prefix</h4>
 <p>Check if a browser prefix is necessary and, if it is, choose the right one.
-Test is based on <code>transform</code> property which necessary for the script ot work.</p>
+Test is based on <code>transform</code> property which necessary for the script to work.</p>
 <ul>
 <li>return: <strong>Numeric</strong> Returns number of iterations.</li>
 </ul>
