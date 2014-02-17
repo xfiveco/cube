@@ -127,7 +127,7 @@
     // * parameters:
     //     - `selector` __string__                  Any CSS selector that will work with [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/document.querySelector).
     //     - `props`    __object__                  The cube's options passed to the constructor.
-    // * return         __function__  or __object__ If the cube can be fired `Cube` will return new isntance of `Cube.instance` constructor else it will return object with empty methods.
+    // * return         __function__  or __object__ If the cube can be fired `Cube` will return new instance of `Cube.instance` constructor else it will return object with empty methods.
     Cube = function (selector, props) {
         if (Test.animationFrame() && Test.css3d()) {
             return new Cube.instance(selector, props || {});
@@ -187,7 +187,7 @@
         // * `isFocusing`     __boolean__ True if cube is being focused at the moment (rotates to show selected side). See `rotate`, `spinTo`, and `focusOn` methods.
         this.isFocusing = false;
 
-        // * `hasFocused`     __boolean__ True if cube has roteted to the selected side. See `focusOn` method.
+        // * `hasFocused`     __boolean__ True if cube has rotated to the selected side. See `focusOn` method.
         this.hasFocused = false;
 
         // * `iterators`     __object__   Stores iterators for each axis. See `spinTo` method.
@@ -235,7 +235,7 @@
         // ```
         // var myCube = Cube('.my .selector');
         // 
-        // // Set the cube's postion
+        // // Set the cube's position
         // myCube.applyRotation({
         //     x: 45,
         //     y: 30,
@@ -246,7 +246,7 @@
         // ```
         // var myCube = Cube('.my .selector');
         // 
-        // // Set the cube's postion
+        // // Set the cube's position
         // myCube.applyRotation({ side: 'side-4' });
         // ```
         applyRotation: function (props) {
@@ -370,7 +370,7 @@
         // Animate to the specified side of the cube on 'mouseover' or 'touchstart' event.
         // 
         // * parameters: `props` __object__ focusOn options:
-        //     - `bounceBack`   __boolean__ If set to true the cube will animate back to its last position (before focusOn animation), else it will stay at the focused postion.
+        //     - `bounceBack`   __boolean__ If set to true the cube will animate back to its last position (before focusOn animation), else it will stay at the focused position.
         //     - `spinTo`       __string__  Specify to which side should the cube animate to. **Note** that this option will overwrite `spintTo[axis]`.
         //     - `spinTo[axis]` __number__  Specify to what degree each axis should animate to.
         //     
@@ -479,13 +479,13 @@
         // ### Private Methods
 
         // #### Spin To
-        // Animate to the specified postion.
+        // Animate to the specified position.
         // 
         // * parameters: `props` __object__ spinTo options:
         //     - `spinTo[axis]` __number__   Specify to what degree each axis should animate to.
-        //     - `speed`        __number__   Time (in milliseconds) that specifies how long it will take to spin to given position. Overtwrites `speed[axis]`.
+        //     - `speed`        __number__   Time (in milliseconds) that specifies how long it will take to spin to given position. Overwrites `speed[axis]`.
         //     - `speed[axis]`  __number__   Time (in milliseconds) that specifies how long it will take to spin to given position for each axis.
-        //     - `timer`        __string__   Timer's ID. It can be reseted if needed thus stoping spinTo loop. Timers are attached to public variable called `timers` (see in contructor).
+        //     - `timer`        __string__   Timer's ID. It can be reset if needed thus stopping spinTo loop. Timers are attached to public variable called `timers` (see in constructor).
         //     - `easing`       __string__   Name of easing function (available functions: 'ease', 'out', 'inOut')
         //     - `callback`     __function__ Function which executes after spinTo is done.
         _spinTo: function (props) {
@@ -626,7 +626,7 @@
             //      - `currentIteration` __number__  Current iteration.
             //      - `startValue`       __number__  Start value. For example: '10'.
             //      - `changeInValue`    __number__  Change in value. For example '40' means that if value started at 10, it would go up to 50.
-            //      - `totalIterations`  __number__  Tells how many iterations should pass until the niamtion is done.
+            //      - `totalIterations`  __number__  Tells how many iterations should pass until the animation is done.
             linear: function (currentIteration, startValue, changeInValue, totalIterations) {
                 return changeInValue * currentIteration / totalIterations + startValue;
             },
@@ -643,7 +643,7 @@
             }
         },
 
-        // #### Caluclate Iterations
+        // #### Calculate Iterations
         // Calculates approximate number of iterations.
         // Converts milliseconds into number of animation frames for the cube.
         // It's assumed here that `requestAnimationFrame` will produce 60 frames per second.
@@ -656,7 +656,7 @@
 
         // #### Get Prefix
         // Check if a browser prefix is necessary and, if it is, choose the right one.
-        // Test is based on `transform` property which necessary for the script ot work.
+        // Test is based on `transform` property which necessary for the script to work.
         // 
         // * return: __Numeric__ Returns number of iterations.
         _getPrefix: function () {
