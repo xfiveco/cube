@@ -2,7 +2,7 @@
 
 # cube.js
 
-cube.js is a light script which allows you to add fancy rotating CSS3 cube to your page!
+cube.js is a light script which allows you to add a fancy rotating CSS3 cube to your page!
 
 Please check <a href="http://xhtmlized.github.io/cube/">the cube's page</a> for more information and examples.
 
